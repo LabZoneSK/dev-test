@@ -1,6 +1,5 @@
 # Labzone - FE Developer Skill Test
 
-A simple test app to ascertain developer skill-level.
 
 The challenge is to create a basic app using HTML, CSS, JavasScript - React.js and the Flickr API.
 
@@ -18,4 +17,3 @@ Pixel perfect mockup to design is a real focus for us at Labzone, the mockup for
 
 ![](./demoImage.jpg?raw=true)
 
-### Good luck !
