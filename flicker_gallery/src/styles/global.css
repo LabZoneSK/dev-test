@@ -1,0 +1,79 @@
+body {
+  background-color: #efefef;
+}
+header {
+  background: #2c2c2c;
+  color: white;
+}
+header h1 {
+  padding: 1%;
+  margin-top: 0;
+}
+main {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  color: black;
+  max-width: 80%;
+  margin: 3% auto;
+}
+.card {
+  flex-basis: 100%;
+  margin: 2% 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: relative;
+  background-color: white;
+}
+.card img {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.cardBody {
+  max-width: 80%;
+  margin: 1% auto;
+}
+.cardExploreBtn {
+  border-radius: 5px;
+  color: #0b868b;
+  padding: 3%;
+
+  margin: 2% auto;
+  margin-top: auto;
+  border: 1px solid #0b868b;
+  width: 80%;
+  text-align: center;
+}
+.cardExploreBtn a {
+  text-decoration: none;
+  color: #0b868b;
+}
+
+footer {
+  background-color: #0b868b;
+  color: white;
+  text-align: center;
+}
+footer h2 {
+  margin-top: auto;
+  padding: 1%;
+  margin-bottom: 0;
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media (min-device-width: 768px) and (max-device-width: 1024px) {
+  .card {
+    flex-basis: 47%;
+  }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width: 1025px) {
+  .card {
+    flex-basis: 30%;
+  }
+}
