@@ -1,22 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoArrowForward } from "react-icons/io5";
-import { m } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 
 interface CardProps {
+  id: number;
   title: string;
   imageSrc: string;
   linkToFlickPost: string;
   description: string;
 }
-function Card({ title, linkToFlickPost, imageSrc, description }: CardProps) {
-  //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+
+function Card({
+  id,
+  title,
+  linkToFlickPost,
+  imageSrc,
+  description,
+}: CardProps) {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    controls.start((i) => ({
+      opacity: 1,
+      x: -30,
+      transition: { delay: i * 0.3 },
+    }));
+  }, [controls]);
 
   return (
-    <m.article
-      className="card"
-      animate={{ x: 100 }}
-      transition={{ ease: "easeOut", duration: 10 }}
-    >
+    <motion.article className="card" custom={id} animate={controls}>
       <img src={imageSrc} alt={description} />
       <div className="cardBody">
         <h3>{title}</h3>
@@ -27,7 +39,7 @@ function Card({ title, linkToFlickPost, imageSrc, description }: CardProps) {
           Explore <IoArrowForward />
         </a>
       </div>
-    </m.article>
+    </motion.article>
   );
 }
 

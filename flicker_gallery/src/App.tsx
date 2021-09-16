@@ -1,60 +1,43 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import "./styles/global.css";
 import Header from "./components/Header";
 import Card from "./components/Card";
 import Footer from "./components/Footer";
-interface FlickerResponse {
-  photos: {
-    page: number;
-    pages: number;
-    perpage: number;
-    total: number;
-    photo: {
-      id: string;
-      owner: string;
-      secret: string;
-      server: string;
-      farm: number;
-      title: string;
-      ispublic: number;
-      isfriend: number;
-      isfamily: number;
-      is_primary: number;
-      has_comment: number;
-      description: {
-        _content: string;
-      };
-    }[];
-  };
-  stat: string;
-}
+import useFetch from "./hooks/useFetch";
+import { FcSearch } from "react-icons/fc";
 
 function App() {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  // @ts-ignore
-  const [images, setImages] = useState<Partial<FlickerResponse>>([]);
+  const [query, setQuery] = useState(
+    "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=2a33dd08ea58d2c86ccb995df5f1cf6b&tags=nature&format=json&extras=description&nojsoncallback=1&per_page=10&page="
+  );
+  const [page, setPage] = useState(1);
+  const [searchText, setSearchText] = useState("");
+  const { loading, error, list } = useFetch(query, page, searchText);
+  const loader = useRef(null);
+  const searchBar = useRef(null);
+  const handleChange = (e: any) => {
+    let s = searchBar.current as any;
+    console.log(s.value);
+    setPage(0);
+    setSearchText("&text=" + s.value);
+  };
+
+  const handleObserver = useCallback((entries) => {
+    const target = entries[0];
+    if (target.isIntersecting) {
+      setPage((prev) => prev + 1);
+    }
+  }, []);
 
   useEffect(() => {
-    axios
-      .get(
-        "https://www.flickr.com/services/rest/?method=flickr.galleries.getPhotos&api_key=2a33dd08ea58d2c86ccb995df5f1cf6b&gallery_id=66911286-72157647277042064&format=json&extras=description&nojsoncallback=1"
-      )
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setImages(result.data);
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-  }, []);
+    const option = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 0,
+    };
+    const observer = new IntersectionObserver(handleObserver, option);
+    if (loader.current) observer.observe(loader.current);
+  }, [handleObserver]);
 
   if (error) {
     // @ts-ignore
@@ -63,33 +46,50 @@ function App() {
     return (
       <div className="App">
         <Header />
-        {!isLoaded && <div>Loading...</div>}
+
         <main>
-          {isLoaded &&
-            images.photos &&
-            images.photos!.photo.map((p) => {
-              return (
-                <Card
-                  key={p.id}
-                  imageSrc={
-                    "https://farm" +
-                    p.farm +
-                    ".staticflickr.com/" +
-                    p.server +
-                    "/" +
-                    p.id +
-                    "_" +
-                    p.secret +
-                    ".jpg"
-                  }
-                  linkToFlickPost={
-                    "https://www.flickr.com/photos/" + p.owner + "/" + p.id
-                  }
-                  title={p.title}
-                  description={p.description._content}
-                />
-              );
-            })}
+          <div className="searchbar">
+            <input
+              ref={searchBar}
+              placeholder="Write here what you want to search as images .."
+            />{" "}
+            <button onClick={handleChange}>
+              {" "}
+              <FcSearch />
+            </button>
+          </div>
+          {list.map((p: any, i: any) => {
+            return (
+              <Card
+                key={i}
+                id={i}
+                imageSrc={
+                  "https://farm" +
+                  p.farm +
+                  ".staticflickr.com/" +
+                  p.server +
+                  "/" +
+                  p.id +
+                  "_" +
+                  p.secret +
+                  ".jpg"
+                }
+                linkToFlickPost={
+                  "https://www.flickr.com/photos/" + p.owner + "/" + p.id
+                }
+                title={p.title}
+                description={p.description._content}
+              />
+            );
+          })}
+          <div ref={loader} />
+          {loading && (
+            <>
+              <br />
+              <div className="loader">Loading...</div>
+            </>
+          )}
+          {error && <p>Error!</p>}
         </main>
         <Footer />
       </div>
