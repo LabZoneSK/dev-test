@@ -29,7 +29,10 @@ function Card({
 
   return (
     <motion.article className="card" custom={id} animate={controls}>
-      <img src={imageSrc} alt={description} />
+      <a href={linkToFlickPost}>
+        <img src={imageSrc} alt={description} />
+      </a>
+
       <div className="cardBody">
         <h3>{title}</h3>
         <p>{description.substr(0, 150) + "..."}</p>

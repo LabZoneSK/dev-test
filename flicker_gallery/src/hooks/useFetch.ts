@@ -16,6 +16,7 @@ function useFetch(query: any, page: any, searchText: any = "") {
         setList([]);
       }
       const res = await axios.get(query + page + text);
+      //   await new Promise((r) => setTimeout(r, 20000));
 
       setList((prev: any) => [...prev, ...res.data.photos.photo]);
       setLoading(false);

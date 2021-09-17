@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 body {
   background-color: #efefef;
 }
@@ -8,6 +11,9 @@ header {
 header h1 {
   padding: 1%;
   margin-top: 0;
+}
+p {
+  word-break: break-all;
 }
 main {
   display: flex;
@@ -22,15 +28,31 @@ main {
   flex-basis: 100%;
   text-align: center;
 }
-.searchbar,
+.searchbar {
+  display: flex;
+  flex-basis: 20% 60% 20%;
+  width: 100%;
+  justify-content: space-around;
+}
+.searchbar * {
+  padding: 1%;
+}
 .searchbar input {
+  flex-basis: 80%;
+}
+/* .searchbar input {
   width: 80%;
   margin: 0 auto;
   padding: 1%;
 }
-.searchbar button {
-  padding: 1%;
+.searchbar * {
+  margin: 1%;
 }
+.searchbar button,
+.searchbar select {
+  padding: 1%;
+  font-weight: bold;
+} */
 .card {
   flex-basis: 100%;
   margin: 2% 0;
@@ -38,6 +60,7 @@ main {
   border-top-right-radius: 10px;
   position: relative;
   background-color: white;
+  padding-bottom: 100px;
 }
 .card img {
   width: 100%;
@@ -51,12 +74,14 @@ main {
   margin: 1% auto;
 }
 .cardExploreBtn {
+  position: absolute;
+  bottom: 0;
   border-radius: 5px;
   color: #0b868b;
   padding: 3%;
 
-  margin: 2% auto;
-  margin-top: auto;
+  margin-bottom: 30px;
+  margin-left: 30px;
   border: 1px solid #0b868b;
   width: 80%;
   text-align: center;
@@ -84,6 +109,38 @@ footer h2 {
   margin-top: auto;
   padding: 1%;
   margin-bottom: 0;
+}
+
+img {
+  /* filter: url(filters.svg#grayscale); Firefox 3.5+ */
+  filter: gray; /* IE5+ */
+  -webkit-filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */
+  -webkit-transition: all 0.8s ease-in-out;
+  transition: all 0.8s ease-in-out;
+}
+img:hover {
+  filter: none;
+  -webkit-filter: grayscale(0);
+  -webkit-transform: scale(1.01);
+  transform: scale(1.01);
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 40px;
+  background: rgb(167, 166, 166);
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 5px 10px #ccc;
+}
+
+.back-to-top:hover {
+  background: rgb(61, 60, 60);
+  transition-duration: 500ms;
 }
 
 /* iPads (portrait and landscape) ----------- */

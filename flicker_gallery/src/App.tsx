@@ -4,24 +4,42 @@ import Header from "./components/Header";
 import Card from "./components/Card";
 import Footer from "./components/Footer";
 import useFetch from "./hooks/useFetch";
-import { FcSearch } from "react-icons/fc";
-
+import { SpinnerDotted } from "spinners-react";
+import Search from "./components/Search";
 function App() {
-  const [query, setQuery] = useState(
+  const query = useState(
     "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=2a33dd08ea58d2c86ccb995df5f1cf6b&tags=nature&format=json&extras=description&nojsoncallback=1&per_page=10&page="
   );
   const [page, setPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const { loading, error, list } = useFetch(query, page, searchText);
-  const loader = useRef(null);
+  const loader = useRef<any>(null);
   const searchBar = useRef(null);
-  const handleChange = (e: any) => {
-    let s = searchBar.current as any;
-    console.log(s.value);
-    setPage(0);
-    setSearchText("&text=" + s.value);
+  const [showButton, setShowButton] = useState(false);
+  const [searchType, setSearchType] = useState("text");
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    });
+  }, []);
+
+  // This function will scroll the window to the top
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
   };
 
+  const handleChange = (e: any) => {
+    let s = searchBar.current as any;
+    setPage(0);
+    setSearchText("&" + searchType + "=" + s.value);
+  };
+  const ChangeSearchType = (e: any) => {
+    setSearchType(e.target.value);
+  };
   const handleObserver = useCallback((entries) => {
     const target = entries[0];
     if (target.isIntersecting) {
@@ -48,16 +66,11 @@ function App() {
         <Header />
 
         <main>
-          <div className="searchbar">
-            <input
-              ref={searchBar}
-              placeholder="Write here what you want to search as images .."
-            />{" "}
-            <button onClick={handleChange}>
-              {" "}
-              <FcSearch />
-            </button>
-          </div>
+          <Search
+            searchBar={searchBar}
+            handleChange={handleChange}
+            ChangeSearchType={ChangeSearchType}
+          />
           {list.map((p: any, i: any) => {
             return (
               <Card
@@ -86,11 +99,18 @@ function App() {
           {loading && (
             <>
               <br />
-              <div className="loader">Loading...</div>
+              <div className="loader">
+                <SpinnerDotted enabled={true} />
+              </div>
             </>
           )}
           {error && <p>Error!</p>}
         </main>
+        {showButton && (
+          <button onClick={scrollToTop} className="back-to-top">
+            &#8679;
+          </button>
+        )}
         <Footer />
       </div>
     );
