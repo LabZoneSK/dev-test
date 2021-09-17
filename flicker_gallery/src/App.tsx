@@ -7,7 +7,7 @@ import useFetch from "./hooks/useFetch";
 import { SpinnerDotted } from "spinners-react";
 import Search from "./components/Search";
 function App() {
-  const query = useState(
+  const [query, setQuery] = useState(
     "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=2a33dd08ea58d2c86ccb995df5f1cf6b&tags=nature&format=json&extras=description&nojsoncallback=1&per_page=10&page="
   );
   const [page, setPage] = useState(1);

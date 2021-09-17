@@ -11,7 +11,6 @@ function useFetch(query: any, page: any, searchText: any = "") {
       setLoading(true);
       setError(false);
       if (text !== searchText) {
-        console.log("jarrive ici");
         setText(searchText);
         setList([]);
       }
