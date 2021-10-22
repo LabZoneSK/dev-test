@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Rosario';
+  src: local('Rosario'), url(../../src/fonts/Rosario-Regular.ttf) format('truetype');
+}
+
+* {
+  font-family: 'Rosario' !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
