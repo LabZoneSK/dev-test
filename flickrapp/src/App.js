@@ -7,7 +7,7 @@ function App() {
   const flickr = new Flickr('06d7c684b3d84a1eaa880de627aff4c3');
   const [images,setImages] = useState([])
   const [curImages,setCurImages] = useState([])
-  const [search,setSearch] = useState('')
+  const [search,setSearch] = useState('slovakia')
 
 
 
@@ -20,7 +20,7 @@ function App() {
 
       
       flickr.photos.search({
-          text: 'expensive cars'
+          text: 'slovakia'
         }).then(function (res) {
             console.log(res.body);
             setImages([...res.body.photos.photo])
@@ -43,7 +43,6 @@ function App() {
     }).catch(function (err) {
       console.error('bonk', err);
     });
-    setSearch('')
   }
 
   function handleScroll(e) {
