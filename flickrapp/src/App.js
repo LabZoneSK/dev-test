@@ -46,9 +46,8 @@ function App() {
   }
 
   function handleScroll(e) {
-    // let cards = document.querySelector('.cards')
-    // console.log(cards.scrollHeight , cards.clientHeight , e.target.scrollTop)
-    if(e.target.scrollTop === e.target.scrollTopMax) {
+    if(e.target.scrollTop + e.target.offsetHeight >= e.target.scrollHeight) {
+      console.log('si na spodu')
       let length = curImages.length
       setCurImages(images.slice(0,length + 10))
     }
