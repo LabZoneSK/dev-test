@@ -5,10 +5,10 @@ import Nav from '../components/NavComponent';
 function Home() {
   return (
     <>
-      <Nav title="Labzone Flickr App" />
+      <Nav title="Flick App" />
       <ImageList />
 
-      <Footer footerText="© 2022" />
+      <Footer footerText="Images are from Flickr." />
     </>
   );
 }

@@ -2,19 +2,36 @@ import React from 'react';
 import {
   Box,
   SimpleGrid,
+  Text,
 } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
+import { types, getSnapshot } from 'mobx-state-tree';
 import ImageCard from '../components/ImageCard';
+import FlickrStore from '../stores/FlickrStore';
 
 interface ImageListProps {
   }
+const imageStore = FlickrStore.create();
+imageStore.fetchContent().then(() => {
+  console.log(getSnapshot(imageStore));
+});
+const CardList = observer((props) => (
+  <>
+    {imageStore.items.map((item) => (
+      <ImageCard
+        title={item.title}
+        author={item.author}
+        dateTaken={item.date_taken}
+        imgUrl={item.media.m}
+      />
+    ))}
+  </>
+));
 const ImageList: React.FC<ImageListProps> = (props) => (
   <Box py={12}>
     <SimpleGrid columns={{ base: 1, md: 5 }} spacing={2}>
-      <ImageCard title="asd" author="test" description="test2" imgUrl="https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80" />
-      <ImageCard title="asd" author="test" description="test2" imgUrl="https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80" />
-      <ImageCard title="asd" author="test" description="test2" imgUrl="https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80" />
-      <ImageCard title="asd" author="test" description="test2" imgUrl="https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80" />
 
+      <CardList />
     </SimpleGrid>
   </Box>
 );

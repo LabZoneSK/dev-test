@@ -11,7 +11,7 @@ import {
 
 interface ImageProps {
     title?: string;
-    description?:string;
+    dateTaken?:string;
     author?:string;
     imgUrl?:string;
   }
@@ -44,14 +44,14 @@ const ImageCard: React.FC<ImageProps> = (props) => (
       </Box>
       <Stack pt={10} align="center">
         <Text color="gray.500" fontSize="sm" textTransform="uppercase">
-          {props.author}
+          {props.author !== undefined ? props.author.split('"')[1] : ''}
         </Text>
         <Heading fontSize="2xl" fontFamily="body" fontWeight={500}>
           {props.title}
         </Heading>
         <Stack direction="row" align="center">
           <Text color="gray.600">
-            {props.description}
+            {props.dateTaken}
           </Text>
         </Stack>
       </Stack>
