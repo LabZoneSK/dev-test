@@ -24,12 +24,22 @@ export const Flickr = types.model('Flickr', {
       tags: '',
     }),
   ),
+  isLoading: true,
 }).views((self) => ({
   listItems(filter:string) {
     if (filter !== '') {
       return self.items.filter((item) => item.title.toLowerCase().includes(filter.toLowerCase()));
     }
     return self.items;
+  },
+})).actions((self) => ({
+  addImage: (images:typeof self.items) => {
+    images.map((image) => {
+      const filteredImage = self.items.filter((item) => item.title === image.title);
+      if (filteredImage.length === 0) {
+        self.items.push(image);
+      }
+    });
   },
 })).actions((self) => ({
 // note the star, this a generator function!
@@ -48,6 +58,7 @@ export const Flickr = types.model('Flickr', {
       self.link = result.link;
       self.modified = result.modified;
       self.title = result.title;
+      self.isLoading = false;
     } catch (err) {
       console.log(err);
     }

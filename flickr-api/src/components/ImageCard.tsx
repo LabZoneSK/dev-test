@@ -45,6 +45,7 @@ const ImageCard: React.FC<ImageProps> = (props) => (
         mt={-12}
         pos="relative"
         height="230px"
+        onClick={() => window.open(props.link, '_blank')}
       >
         <Image
           rounded="lg"
@@ -112,6 +113,7 @@ const ImageCard: React.FC<ImageProps> = (props) => (
             width="200px"
             border="2px"
             borderColor="green.500"
+            onClick={() => window.open(props.link, '_blank')}
             rightIcon={<BsArrowRight />}
           >
             Explore
