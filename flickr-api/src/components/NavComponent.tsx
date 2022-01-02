@@ -18,7 +18,7 @@ import { BsSearch } from 'react-icons/bs';
 
 interface NavProps {
     title: string;
-    search?: string;
+    search: CallableFunction;
   }
 
 const Nav: React.FC<NavProps> = (props) => {
@@ -37,7 +37,7 @@ const Nav: React.FC<NavProps> = (props) => {
               <FormControl isRequired>
                 <InputGroup>
                   <InputLeftElement children={<BsSearch />} />
-                  <Input type="text" name="name" placeholder="Search" />
+                  <Input type="text" name="name" placeholder="Search" onChange={(event) => props.search(event.target.value)} />
                 </InputGroup>
               </FormControl>
               <Button onClick={toggleColorMode}>

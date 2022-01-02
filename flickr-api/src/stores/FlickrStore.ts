@@ -24,7 +24,13 @@ export const Flickr = types.model('Flickr', {
       tags: '',
     }),
   ),
-}).actions((self) => ({
+}).views((self) => ({
+  listItems(filter:string) {
+    if (filter !== '') {
+      return self.items.filter((item) => item.title.toLowerCase().includes(filter.toLowerCase()));
+    }
+    return self.items;
+  },
 })).actions((self) => ({
 // note the star, this a generator function!
   fetchContent: flow(function* fetchInstalled() {
@@ -47,5 +53,4 @@ export const Flickr = types.model('Flickr', {
     }
   }),
 }));
-
 export default Flickr;

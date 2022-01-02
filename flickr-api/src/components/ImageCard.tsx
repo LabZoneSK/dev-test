@@ -1,19 +1,31 @@
 import React from 'react';
 import {
   Box,
-  Center,
+  Wrap,
+  WrapItem,
   useColorModeValue,
   Heading,
   Text,
   Stack,
   Image,
+  Tag,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Button,
 } from '@chakra-ui/react';
+import { BsArrowRight } from 'react-icons/bs';
 
 interface ImageProps {
     title?: string;
     dateTaken?:string;
     author?:string;
     imgUrl?:string;
+    tags?:string;
+    description?:string;
+    link?:string;
   }
 const ImageCard: React.FC<ImageProps> = (props) => (
   <Box py={12}>
@@ -54,6 +66,57 @@ const ImageCard: React.FC<ImageProps> = (props) => (
             {props.dateTaken}
           </Text>
         </Stack>
+        <Accordion allowToggle allowMultiple>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  Description
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <div dangerouslySetInnerHTML={{ __html: props.description! }} />
+
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  Tags
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              {props.tags
+                ? (
+                  <Wrap direction="row" align="center">
+                    {props.tags?.split(' ').map((tag) => (
+                      <WrapItem>
+                        <Tag>{tag}</Tag>
+                      </WrapItem>
+
+                    ))}
+                  </Wrap>
+                ) : null}
+
+            </AccordionPanel>
+          </AccordionItem>
+          <Button
+            mt={10}
+            size="md"
+            height="48px"
+            width="200px"
+            border="2px"
+            borderColor="green.500"
+            rightIcon={<BsArrowRight />}
+          >
+            Explore
+          </Button>
+        </Accordion>
       </Stack>
     </Box>
   </Box>
