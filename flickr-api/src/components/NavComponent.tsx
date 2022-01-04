@@ -9,7 +9,7 @@ import {
   InputLeftElement,
   FormControl,
   useDisclosure,
-  useColorModeValue,
+  Heading,
   Stack,
   useColorMode,
 } from '@chakra-ui/react';
@@ -26,9 +26,9 @@ const Nav: React.FC<NavProps> = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-        <Flex h={16} alignItems="center" justifyContent="space-between">
-          <Box>
+      <Box bg="#2C2C2C" px={4}>
+        <Flex h="65px" alignItems="center" justifyContent="space-between">
+          <Box color="#FFF" style={{ fontSize: '28px', lineHeight: '34px' }}>
             {props.title}
           </Box>
 
@@ -36,13 +36,10 @@ const Nav: React.FC<NavProps> = (props) => {
             <Stack direction="row" spacing={7}>
               <FormControl isRequired>
                 <InputGroup>
-                  <InputLeftElement children={<BsSearch />} />
+                  <InputLeftElement children={<BsSearch color="#fff" />} />
                   <Input type="text" name="name" placeholder="Search" onChange={(event) => props.search(event.target.value)} />
                 </InputGroup>
               </FormControl>
-              <Button onClick={toggleColorMode}>
-                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-              </Button>
 
             </Stack>
           </Flex>

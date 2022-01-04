@@ -40,7 +40,7 @@ const CardList = observer((props:ImageListProps) => (
   </>
 ));
 const ImageList: React.FC<ImageListProps> = (props) => (
-  <Box py={12}>
+  <Box py={12} background="#EFEFEF" style={{ paddingTop: 81, paddingLeft: 76, paddingRight: 76 }}>
     <CardList {...props} />
 
   </Box>

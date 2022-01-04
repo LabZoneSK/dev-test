@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 const theme = extendTheme({
   config: {
-    initialColorMode: 'dark',
+    initialColorMode: 'light',
   },
 });
 ReactDOM.render(

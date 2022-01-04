@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { BsArrowRight } from 'react-icons/bs';
 
+const htmlRegex = /(<([^>]+)>)/ig;
 interface ImageProps {
     title?: string;
     dateTaken?:string;
@@ -28,11 +29,18 @@ interface ImageProps {
     link?:string;
   }
 const ImageCard: React.FC<ImageProps> = (props) => (
-  <Box py={12}>
+  <Box py={12} style={{ borderRadius: '3px' }}>
+    <Image
+      height={154}
+      width={286}
+      borderTopRadius="3px"
+      objectFit="cover"
+      src={props.imgUrl}
+    />
     <Box
       role="group"
       p={6}
-      maxW="330px"
+      maxW="286px"
       w="full"
       bg={useColorModeValue('white', 'gray.800')}
       boxShadow="2xl"
@@ -40,85 +48,31 @@ const ImageCard: React.FC<ImageProps> = (props) => (
       pos="relative"
       zIndex={1}
     >
-      <Box
-        rounded="lg"
-        mt={-12}
-        pos="relative"
-        height="230px"
-        onClick={() => window.open(props.link, '_blank')}
-      >
-        <Image
-          rounded="lg"
-          height={230}
-          width={282}
-          objectFit="cover"
-          src={props.imgUrl}
-        />
-      </Box>
-      <Stack pt={10} align="center">
-        <Text color="gray.500" fontSize="sm" textTransform="uppercase">
-          {props.author !== undefined ? props.author.split('"')[1] : ''}
-        </Text>
-        <Heading fontSize="2xl" fontFamily="body" fontWeight={500}>
+
+      <Stack pt={2} align="center">
+        <Heading fontSize="28px" fontFamily="body" fontWeight={500}>
           {props.title}
         </Heading>
-        <Stack direction="row" align="center">
-          <Text color="gray.600">
-            {props.dateTaken}
-          </Text>
-        </Stack>
-        <Accordion allowToggle allowMultiple>
-          <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box flex="1" textAlign="left">
-                  Description
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-              <div dangerouslySetInnerHTML={{ __html: props.description! }} />
-
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box flex="1" textAlign="left">
-                  Tags
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-              {props.tags
-                ? (
-                  <Wrap direction="row" align="center">
-                    {props.tags?.split(' ').map((tag) => (
-                      <WrapItem>
-                        <Tag>{tag}</Tag>
-                      </WrapItem>
-
-                    ))}
-                  </Wrap>
-                ) : null}
-
-            </AccordionPanel>
-          </AccordionItem>
-          <Button
-            mt={10}
-            size="md"
-            height="48px"
-            width="200px"
-            border="2px"
-            borderColor="green.500"
-            onClick={() => window.open(props.link, '_blank')}
-            rightIcon={<BsArrowRight />}
-          >
-            Explore
-          </Button>
-        </Accordion>
+        <Text>
+          {props.description?.replace(htmlRegex, '')}
+        </Text>
+        <Button
+          mt={10}
+          size="md"
+          height="44px"
+          width="235px"
+          border="2px"
+          borderRadius="3px"
+          backgroundColor="#F5F5F5"
+          textColor="#0B868B"
+          fontSize="16px"
+          fontWeight="normal"
+          borderColor="#0B868B"
+          onClick={() => window.open(props.link, '_blank')}
+          rightIcon={<BsArrowRight />}
+        >
+          Explore
+        </Button>
       </Stack>
     </Box>
   </Box>

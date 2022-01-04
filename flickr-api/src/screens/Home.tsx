@@ -10,7 +10,7 @@ function Home() {
   }
   return (
     <>
-      <Nav title="Flick App" search={callback} />
+      <Nav title="Flick app" search={callback} />
       <ImageList searchText={searchText} />
 
       <Footer footerText="Images are from Flickr." />

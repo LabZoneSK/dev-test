@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Box,
   Container,
-  Stack,
+  Center,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
@@ -12,21 +12,12 @@ interface FooterProps {
   }
 const Footer: React.FC<FooterProps> = (props) => (
   <Box
-    bg={useColorModeValue('gray.50', 'gray.900')}
+    bg="#0B868B"
     color={useColorModeValue('gray.700', 'gray.200')}
   >
-    <Container
-      as={Stack}
-      maxW="6xl"
-      py={4}
-      direction={{ base: 'column', md: 'row' }}
-      spacing={4}
-      justify={{ base: 'center', md: 'space-between' }}
-      align={{ base: 'center', md: 'center' }}
-    >
-      <Text>{props.footerText}</Text>
-      <Stack direction="row" spacing={6} />
-    </Container>
+    <Center height="65px">
+      <Text color="#fff" style={{ fontSize: '18px' }}>{props.footerText}</Text>
+    </Center>
   </Box>
 );
 export default Footer;
