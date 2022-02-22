@@ -1,0 +1,27 @@
+$mainColor: #0b868b;
+
+footer {
+  background-color: $mainColor;
+}
+
+.explore-btn {
+  padding: 1em 5em 1em 5em;
+  color: $mainColor;
+  text-decoration: none;
+  &:hover {
+      border: 0.1em solid $mainColor;
+      border-radius: 5px;
+      color: $mainColor;
+  }
+}
+
+.card-text{
+  max-height: 18em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.App {
+  text-align: center;
+}
+  
