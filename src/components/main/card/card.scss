@@ -2,11 +2,13 @@
 	width: 286px;
 	background-color: white;
 	border-radius: 3px;
+	margin: 20px;
 
 	.image-card {
 		width: 286px;
 		height: 155px;
 		border-radius: 3px 3px 0px 0px;
+		cursor: pointer;
 	}
 
 	.title-desc-button {
@@ -15,6 +17,7 @@
 		.title-card {
 			margin: 0px;
 			font-size: 28px;
+			word-break: break-all;
 		}
 
 		.description-card {
