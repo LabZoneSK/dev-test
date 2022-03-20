@@ -1,0 +1,45 @@
+.card-container {
+	width: 286px;
+	background-color: white;
+	border-radius: 3px;
+
+	.image-card {
+		width: 286px;
+		height: 155px;
+		border-radius: 3px 3px 0px 0px;
+	}
+
+	.title-desc-button {
+		padding: 20px;
+
+		.title-card {
+			margin: 0px;
+			font-size: 28px;
+		}
+
+		.description-card {
+			margin: 0px;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 19px;
+		}
+
+		.button-card {
+			height: 44px;
+			text-align: center;
+			background: #f5f5f5;
+			line-height: 44px;
+			margin: 0px;
+			color: #0b868b;
+			font-size: 16px;
+			border-radius: 3px;
+		}
+
+		.button-card:hover {
+			border: 1px solid #0b868b;
+			cursor: pointer;
+		}
+	}
+}
