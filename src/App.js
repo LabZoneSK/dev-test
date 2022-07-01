@@ -1,9 +1,13 @@
+import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
+
 function App() {
-  return (
-    <div>
-      <h1>test</h1>
-    </div>
-  );
+    return (
+        <div className={'font-primary h-screen flex flex-col bg-[#EFEFEF]'}>
+            <Navbar/>
+            <Footer/>
+        </div>
+    );
 }
 
 export default App;
