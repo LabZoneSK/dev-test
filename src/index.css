@@ -7,4 +7,7 @@
     .container {
         @apply mx-auto w-full max-w-[290px] md:max-w-[955px];
     }
+    .transition-default {
+        @apply transition ease-in-out duration-200;
+    }
 }

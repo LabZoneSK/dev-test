@@ -38,7 +38,7 @@ export default function Card({id, title, serverId, secret}) {
                 </p>
                 <a
                     href={`https://www.flickr.com/photos/${userId}/${id}`}
-                    className={'flex items-center justify-center w-full rounded-[3px] bg-[#F5F5F5] h-[45px] text-primary hover:border border-primary text-[16px] leading-[19px]'}>Explore
+                    className={'transition-default flex items-center justify-center w-full rounded-[3px] bg-[#F5F5F5] h-[45px] text-primary hover:border hover:border-primary text-[16px] leading-[19px]'}>Explore
                 </a>
             </div>
         </CardContainer>

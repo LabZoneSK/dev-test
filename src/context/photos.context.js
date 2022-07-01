@@ -3,12 +3,12 @@ import {useState, createContext} from "react";
 export const PhotosContext = createContext('');
 
 export function PhotoProvider({children}) {
-    const [photos, setPhotos] = useState(null);
+    const [tag, setTag] = useState(null);
 
-    const changePhotos = (val) => setPhotos(val)
+    const changeTag = (val) => setTag(val)
 
     return (
-        <PhotosContext.Provider value={{photos, changePhotos}}>
+        <PhotosContext.Provider value={{tag, changeTag}}>
             {children}
         </PhotosContext.Provider>
     )
