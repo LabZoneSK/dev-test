@@ -17,6 +17,12 @@ Email: chi.nguyenhuungoc@gmail.com
 
 ## Run development
 
+- (Optional) Create `.env` from `.env.example`
+
+```
+cp .env.example .env
+```
+
 - Install dependencies
 
 ```
