@@ -16,6 +16,4 @@ More documentation on the API can be found on [this link](https://www.flickr.com
 
 Pixel perfect mockup to design is a real focus for us at Labzone, the mockup for the test can be found @ https://www.figma.com/file/WnxpAKMFJkzvcrzf4h8vok/Flickr-App (you will need to login to see design details / sidebar)
 
-
-
 ### Good luck !
