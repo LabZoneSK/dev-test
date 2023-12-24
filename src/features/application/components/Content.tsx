@@ -1,38 +1,32 @@
+import { UIEvent } from "react";
+import Card from "../../../shared/components/Card";
 import { useGetFeed } from "../hooks/useGetFeed";
 
 const Content = () => {
   const { items, isLoading, refetch } = useGetFeed();
-  console.log(items);
-  const openLink = (link: string) => {
-    window.open(link, "_blank");
-  };
 
-  const handleScroll = (e: any) => {
-    const { scrollTop, clientHeight, scrollHeight } = e.target;
-    if (scrollTop + clientHeight >= scrollHeight - 65) {
+  const handleScroll = (e: UIEvent) => {
+    const { scrollTop, clientHeight, scrollHeight } = e.target as HTMLElement;
+    const footerHeight = 65;
+
+    if (scrollTop + clientHeight >= scrollHeight - footerHeight) {
       refetch();
     }
   };
 
   return (
-    <main onScroll={handleScroll} className="flex-1 overflow-scroll">
-      {!items && isLoading && <div className="">Loading feed...</div>}
+    <main onScroll={handleScroll} className="flex-1 overflow-scroll ">
+      <div className="container mx-auto">
+        {isLoading && <div className="">Loading feed...</div>}
 
-      {items?.map((item) => {
-        console.log(item.link);
-        return (
-          <div className="card" key={item.link}>
-            <img src={item.media.m} alt={item.description} height="50" />
-            <div className="">{item.title}</div>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: item.description.replace(/<img .*?>/g, ""),
-              }}
-            ></span>
-            <button onClick={() => openLink(item.link)}>Explore -{">"}</button>
+        <div className="p-8">
+          <div className="grid grid-flow-row gap-8 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {items?.map((item, index) => (
+              <Card data={item} key={`${item.link}-${index}`} />
+            ))}
           </div>
-        );
-      })}
+        </div>
+      </div>
     </main>
   );
 };
