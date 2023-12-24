@@ -1,19 +1,70 @@
-# Labzone - FE Developer Skill Test
+# Saidot Assignment
 
-A simple test app to ascertain developer skill-level.
+The assignment is bootstrap with Vite + Typescript + React.
 
-The challenge is to create a basic app using HTML, CSS, JavasScript - React.js and the Flickr API.
+Author: Chi Nguyen
 
-The app should demonstate your ability to set up a React App, load in some photos from Flickr (JSON format) [public API](https://api.flickr.com/services/feeds/photos_public.gne?format=json) and display the photo, name and description in a card layout. The images should be clickable and link to the content. The app should have a header and a footer and ideally be responsive.
+Email: chi.nguyenhuungoc@gmail.com
 
-Bonus points will be awarded for a working search box, loading more photos on scroll and any other visual improvements or animations that you would like to add.
+## Prerequisite
 
-Please fork this repository and create pull request when you are done.
+- For development:
 
-If you do wish to use other Flickr API feeds, be aware that some endpoints do require an API key. You can register for an API key [here](https://www.flickr.com/services/apps/create/).
+  - Development environment run by Esbuild. Which serve ESM module to browser
+  - So make sure that you use a browser that support ESM. Almost all browser nowaday support ESM. Google Chrome should be the best
 
-More documentation on the API can be found on [this link](https://www.flickr.com/services/api/).
+- Port 5174, 4173 is available
 
-Pixel perfect mockup to design is a real focus for us at Labzone, the mockup for the test can be found @ https://www.figma.com/file/WnxpAKMFJkzvcrzf4h8vok/Flickr-App (you will need to login to see design details / sidebar)
+## Run development
 
-### Good luck !
+- Install dependencies
+
+```
+   npm install
+```
+
+- Run development
+
+```
+   npm run dev
+```
+
+- Navigate to browser and open `http://localhost:5174/`
+
+## Build and serve from build
+
+- Build
+
+```
+    npm run build
+```
+
+- Run preview command
+
+```
+    npm run preview
+```
+
+- From browser open `http://localhost:4173/`
+
+## Run test
+
+- Run all test
+
+```
+   npm run test
+```
+
+- Run code coverage
+
+```
+   npm run coverage
+```
+
+## Other commands
+
+- Lint
+
+```
+   npm run lint
+```

@@ -30,6 +30,7 @@ export const useGetFeed = () => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
   return { isLoading, items, error, refetch };

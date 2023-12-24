@@ -48,17 +48,23 @@ const Content = () => {
   return (
     <main onScroll={handleScroll} className="flex-1 overflow-scroll ">
       <div className="container mx-auto">
-        <div className="p-8 md:px-0 pb-0 flex justify-end min-w-[300px] ">
-          <input
-            name="search"
-            type="text"
-            placeholder="Search by title"
-            className="w-full sm:w-1/3 rounded-xl border px-4 py-2 hover:border-secondary focus:outline-none focus:ring-secondary focus:border-secondary"
-            onChange={handleSearch}
-          />
-        </div>
+        {items.length !== 0 && !error && (
+          <>
+            <div className="p-8 md:px-0 pb-0 flex justify-end min-w-[300px] ">
+              <input
+                id="search"
+                aria-label="search"
+                name="search"
+                type="text"
+                placeholder="Search by title"
+                className="w-full sm:w-1/3 rounded-xl border px-4 py-2 hover:border-secondary focus:outline-none focus:ring-secondary focus:border-secondary"
+                onChange={handleSearch}
+              />
+            </div>
+            <CardList items={filteredItems} />
+          </>
+        )}
 
-        <CardList items={filteredItems} />
         {isLoading && (
           <div className="w-full inline-flex items-center justify-center my-8">
             <LoadingSpinner />

@@ -1,7 +1,7 @@
 export interface Media {
   s?: string;
   m?: string;
-  l: string;
+  l?: string;
 }
 
 export interface FeedItem {
