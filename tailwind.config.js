@@ -7,7 +7,6 @@ export default {
         primary: "#2C2C2C",
         secondary: "#0B868B",
         explore: "#F5F5F5",
-        "explore-dark": "#dcdcdc",
       },
     },
   },
