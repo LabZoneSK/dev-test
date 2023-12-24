@@ -1,38 +1,64 @@
-import { UIEvent, useCallback } from "react";
-import Card from "./Card/Card";
+import { ChangeEvent, UIEvent, useCallback, useMemo, useState } from "react";
 import { useGetFeed } from "../hooks/useGetFeed";
 import LoadingSpinner from "../../../shared/components/icons/LoadingSpinner";
+import CardList from "./Card/CardList";
+import { useDebounce } from "use-debounce";
 
 const Content = () => {
   const { items, isLoading, error, refetch } = useGetFeed();
+  const [search, setSearch] = useState<string>("");
+  const [debouncedSearch] = useDebounce(search, 500);
 
+  const filteredItems = useMemo(() => {
+    if (debouncedSearch !== "") {
+      return items.filter((item) =>
+        item.title.toLowerCase().includes(debouncedSearch.toLowerCase())
+      );
+    }
+
+    return items;
+  }, [debouncedSearch, items]);
+
+  /**
+   * Watch main container scroll position
+   * When scroll position almost reach bottom of container (right before last 100px)
+   * Do a refetch, which increase page size
+   * Update search result list with new items
+   */
   const handleScroll = useCallback(
     (e: UIEvent) => {
+      // Do not fetch while loading or searching
       if (isLoading) return;
+      if (debouncedSearch) return;
 
       const { scrollTop, clientHeight, scrollHeight } = e.target as HTMLElement;
-      const footerHeight = 65;
+      const fetchOffset = 100;
 
-      if (scrollTop + clientHeight >= scrollHeight - footerHeight) {
+      if (scrollTop + clientHeight >= scrollHeight - fetchOffset) {
         refetch();
       }
     },
-    [isLoading, refetch]
+    [debouncedSearch, isLoading, refetch]
   );
+
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
 
   return (
     <main onScroll={handleScroll} className="flex-1 overflow-scroll ">
       <div className="container mx-auto">
-        {items.length !== 0 && (
-          <div className="p-8">
-            <div className="grid grid-flow-row gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {items.map((item, index) => (
-                <Card data={item} key={`${item.link}-${index}`} />
-              ))}
-            </div>
-          </div>
-        )}
+        <div className="p-8 md:px-0 pb-0 flex justify-end min-w-[300px] ">
+          <input
+            name="search"
+            type="text"
+            placeholder="Search by title"
+            className="w-full sm:w-1/3 rounded-xl border px-4 py-2 hover:border-secondary focus:outline-none focus:ring-secondary focus:border-secondary"
+            onChange={handleSearch}
+          />
+        </div>
 
+        <CardList items={filteredItems} />
         {isLoading && (
           <div className="w-full inline-flex items-center justify-center my-8">
             <LoadingSpinner />
