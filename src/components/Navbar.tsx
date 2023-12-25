@@ -18,33 +18,21 @@ const Navbar = () => {
             <span className="font-thin text-xl  text-white">Flick app</span>
           </div>
         </Link>
-        <div className="block lg:hidden ">
-          <button
-            id="nav"
-            className="flex items-center px-3 py-2 border-2 rounded"
-          >
-            <svg
-              className="fill-white h-3 w-3"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Menu</title>
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-            </svg>
-          </button>
-        </div>
       </div>
 
       <div className="menu w-full  flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8">
-        <div className="relative mx-auto text-gray-600 lg:block hidden">
+        <div className="relative mx-auto text-gray-600 lg:block lg:mt-0 mt-4 ">
           <input
             className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 w-96 rounded-lg text-sm focus:outline-none"
             type="search"
             name="search"
             onChange={handleChange}
-            placeholder="Search"
+            placeholder="Search By Title"
           />
-          <button type="submit" className="absolute right-0 top-0 mt-3 mr-2">
+          <button
+            type="submit"
+            className="absolute right-0 top-0 mt-3 lg:mr-2 mr-0"
+          >
             <svg
               className="text-black h-4 w-4 fill-current"
               xmlns="http://www.w3.org/2000/svg"

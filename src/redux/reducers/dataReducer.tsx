@@ -1,7 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchAllData } from "../../api/dataFetch";
+import { DataReducer } from "../../types/Data";
 
-const initialState: any = {
+const initialState: DataReducer = {
   data: [],
   searchText: "",
   loading: true,

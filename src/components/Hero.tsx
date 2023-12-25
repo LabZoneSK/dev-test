@@ -12,13 +12,13 @@ const Hero = () => {
     },
   };
   return (
-    <div className=" w-full bg-[#34495e] bg-opacity-50  ">
+    <div className=" w-full bg-[#34495e] bg-opacity-50 h-[200px] lg:h-[400px]  ">
       <div className="flex flex-row  max-w-[90%] m-auto  gap-2 justify-items-center justify-around  ">
-        <div className="lg:mt-16 mt-4 flex flex-col gap-6 justify-items-center align-items-center ">
-          <h1 className="text-white font-bold lg:text-5xl text-2xl capitalize">
+        <div className="lg:mt-16 mt-8 flex flex-col gap-4 mb-4 lg:gap-6 ">
+          <h1 className="text-white font-bold lg:text-5xl text-4xl capitalize">
             Showcase
           </h1>
-          <h1 className="text-white font-bold lg:text-5xl text-2xl capitalize">
+          <h1 className="text-white font-bold lg:text-5xl text-4xl capitalize">
             Your Photos
           </h1>
         </div>

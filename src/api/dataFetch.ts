@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { Data } from "../types/Data";
 
 const urls: { [key: string]: string } = {
   data: "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=true",
@@ -8,7 +9,7 @@ const urls: { [key: string]: string } = {
 
 //redux thunk:middleware for using async call in redux
 export const fetchAllData = createAsyncThunk<
-  any,
+  Data[],
   void,
   { rejectValue: string }
 >("fetchAllData", async (_, { rejectWithValue }) => {
@@ -21,7 +22,6 @@ export const fetchAllData = createAsyncThunk<
     });
     const data = await jsonData.data;
     toast("Data fetch successfully");
-
     return data.items;
   } catch (e) {
     const error = e as AxiosError;
