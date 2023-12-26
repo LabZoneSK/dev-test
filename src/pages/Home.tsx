@@ -1,28 +1,32 @@
 import React, { useEffect, useMemo, useState } from "react";
-import Hero from "../components/Hero";
 import ImageCard from "../components/ImageCard";
 import useAppSelector from "../hooks/useAppSelector";
-import Loader from "../components/Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Data } from "../types/Data";
 
+// Lazy load Hero and Loader components
+const Hero = React.lazy(() => import("../components/Hero"));
+const Loader = React.lazy(() => import("../components/Loader"));
+
 const Home = () => {
-  const { data } = useAppSelector((state) => state.dataReducer);
-  const { searchText } = useAppSelector((state) => state.dataReducer);
+  const { data, loading, searchText } = useAppSelector(
+    (state) => state.dataReducer
+  );
+
   const [items, setItems] = useState<Data[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
   const loadMore = () => {
-    setLoading(true);
+    setLoader(true);
 
     setTimeout(() => {
       const newItems = data.slice(items.length, items.length + 4);
 
       setItems([...items, ...newItems]);
 
-      setLoading(false);
+      setLoader(false);
 
       if (items.length >= data.length) {
         setHasMore(false);
@@ -33,8 +37,6 @@ const Home = () => {
   useEffect(() => {
     loadMore();
   }, []);
-
-  console.log(process.env.REACT_APP_FLICKR_API, "I am data");
 
   const debouncedSearchText = useDebounce(searchText, 500);
   const filteredData = useMemo(
@@ -47,6 +49,7 @@ const Home = () => {
 
   return (
     <>
+      {loading && <Loader />}
       <Hero />
 
       <InfiniteScroll

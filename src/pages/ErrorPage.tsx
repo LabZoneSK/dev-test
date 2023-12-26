@@ -5,7 +5,7 @@ const ErrorPage = () => {
     <div className="container mx-auto flex flex-col items-center">
       <img
         src="https://m3.material.io/static/angular/404-light.caafc6e0327e9785.png"
-        alt="Error image description"
+        alt="Error  description"
         className="w-[40rem] h-auto rounded "
       />
       <h1 className=" text-black text-4xl font-bold mb-6 ">Error Page</h1>

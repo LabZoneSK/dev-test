@@ -24,7 +24,7 @@ const Navbar = () => {
         <div className="relative mx-auto text-gray-600 lg:block lg:mt-0 mt-4 ">
           <input
             className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 w-96 rounded-lg text-sm focus:outline-none"
-            type="search"
+            type="text"
             name="search"
             onChange={handleChange}
             placeholder="Search By Title"
