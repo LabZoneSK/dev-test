@@ -34,6 +34,8 @@ const Home = () => {
     loadMore();
   }, []);
 
+  console.log(process.env.REACT_APP_FLICKR_API, "I am data");
+
   const debouncedSearchText = useDebounce(searchText, 500);
   const filteredData = useMemo(
     () =>

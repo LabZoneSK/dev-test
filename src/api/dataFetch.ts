@@ -4,7 +4,9 @@ import { toast } from "react-toastify";
 import { Data } from "../types/Data";
 
 const urls: { [key: string]: string } = {
-  data: "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=true",
+  data:
+    process.env.FLICKR_API ||
+    "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=true",
 };
 
 //redux thunk:middleware for using async call in redux
