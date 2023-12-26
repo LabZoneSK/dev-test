@@ -53,7 +53,7 @@ Here is all the basic functionality added to the web application
 - Error Page
 - Image Link Page
 
-- ## Testing
+## Testing
 Testing is done using React Testing Library and Jest.
 All the functions written in the reducer and components are tested properly for  possible test cases.
 Test cases are written for:
