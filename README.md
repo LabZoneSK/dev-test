@@ -3,7 +3,7 @@
 This is a developer task done as an assignment. This is a web application titled Flickr which fetches images and data  uploaded by the user from Flickr API. 
 The project is live at  (https://dev-test-beryl-iota.vercel.app/).
 
-![Home Page](https://github.com/aln1234/fs16-fullstack/blob/main/sitescroll.gif?raw=true)
+![Home Page](https://github.com/aln1234/dev-test/blob/main/public/gif/scroll.gif?raw=true)
 # Name of the project:
 
 Flickr
