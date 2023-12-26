@@ -1,37 +1,24 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import "@fontsource-variable/rosario";
+import "./App.module.css";
+
+/*
+TODO:
+2. Get the images
+3. Change the max-width, set some higher value and increase the number of card per row (max 5?)
+4. Filters (see api docs)
+5. Infinite scroll (add a button to enable the infinite scroll, limit to like 10 requests in total?)
+*/
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
 		<>
-			<div>
-				<a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank" rel="noreferrer">
-					<img
-						src={reactLogo}
-						className="logo react"
-						alt="React logo"
-					/>
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
+			<header>
+				<h1>Flick app</h1>
+			</header>
+			<main></main>
+			<footer>
+				<p>Images are from Flickr.</p>
+			</footer>
 		</>
 	);
 }
