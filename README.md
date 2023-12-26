@@ -4,6 +4,7 @@ This is a developer task done as an assignment. This is a web application titled
 The project is live at  (https://dev-test-beryl-iota.vercel.app/).
 
 ![Home Page](https://github.com/aln1234/dev-test/blob/main/public/gif/scroll.gif?raw=true)
+
 # Name of the project:
 
 Flickr
