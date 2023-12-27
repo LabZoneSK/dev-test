@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Data } from "../types/Data";
 
-const ImageCard = ({ item }: any) => {
+ type ItemProps ={
+  item:Data
+ }
+
+const ImageCard = ({ item }: ItemProps) => {
   const date = new Date(item.date_taken);
   const regex = /\(\"(.*)\"\)/;
   const match = item.author.match(regex);
@@ -38,7 +43,7 @@ const ImageCard = ({ item }: any) => {
           {item.title}
         </div>
         <p className="text-gray-700 text-base font-semibold ">
-          Author: <span className="text-[rgb(11,134,139)] ">{match[1]}</span>
+          Author: <span className="text-[rgb(11,134,139)] ">{match && match[1]}</span>
         </p>
         <p className="text-gray-700 text-base">
           Date:{" "}

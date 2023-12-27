@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import ImageCard from "../components/ImageCard";
 import useAppSelector from "../hooks/useAppSelector";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -13,26 +13,19 @@ const Home = () => {
   const { data, loading, searchText } = useAppSelector(
     (state) => state.dataReducer
   );
-
+  
   const [items, setItems] = useState<Data[]>([]);
-  const [loader, setLoader] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-
-  const loadMore = () => {
-    setLoader(true);
-
+  
+  const loadMore = useCallback(() => {
     setTimeout(() => {
       const newItems = data.slice(items.length, items.length + 4);
-
       setItems([...items, ...newItems]);
-
-      setLoader(false);
-
       if (items.length >= data.length) {
         setHasMore(false);
       }
     }, 1000);
-  };
+  }, [data, items]); 
 
   useEffect(() => {
     loadMore();
@@ -48,10 +41,9 @@ const Home = () => {
   );
 
   return (
-    <>
-      {loading && <Loader />}
+    <Suspense fallback={<Loader />}>
       <Hero />
-
+      {loading && <Loader />}
       <InfiniteScroll
         dataLength={items.length}
         next={loadMore}
@@ -66,7 +58,7 @@ const Home = () => {
             ))}
         </div>
       </InfiniteScroll>
-    </>
+    </Suspense>
   );
 };
 
