@@ -1,0 +1,21 @@
+@import url("../variables.css");
+
+.card {
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+	/* variables dont work in media queries */
+	.card {
+		max-width: 286px;
+	}
+}
+
+.card-image {
+	display: block;
+	width: 100%;
+
+	img {
+		width: 100%;
+	}
+}

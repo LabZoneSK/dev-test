@@ -16,8 +16,14 @@ header {
 
 main {
 	min-height: calc(100vh - 2 * var(--block-height));
-	padding: 81px 76px;
+	padding: 24px;
 	background-color: #efefef;
+}
+
+@media (min-width: 768px) {
+	main {
+		padding: 81px 76px; /* adjust this */
+	}
 }
 
 footer {

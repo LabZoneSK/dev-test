@@ -1,5 +1,6 @@
 import "@fontsource-variable/rosario";
 import "./App.module.css";
+import { FlickrFeed } from "./FlickrFeed";
 
 /*
 TODO:
@@ -15,7 +16,9 @@ function App() {
 			<header>
 				<h1>Flick app</h1>
 			</header>
-			<main></main>
+			<main>
+				<FlickrFeed />
+			</main>
 			<footer>
 				<p>Images are from Flickr.</p>
 			</footer>
