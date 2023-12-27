@@ -1,3 +1,5 @@
+import styles from "./FlickrFeed.module.css";
+
 import useSWRImmutable from "swr/immutable";
 import { ImageCard } from "./components/ImageCard";
 import { fetcher } from "./fetcher";
@@ -6,7 +8,7 @@ export function FlickrFeed(): JSX.Element {
 	const { imagesFeed } = useFlickrFeed();
 
 	return (
-		<div>
+		<div className={styles["feed-container"]}>
 			{imagesFeed.map((image) => (
 				<ImageCard
 					key={image.description}
