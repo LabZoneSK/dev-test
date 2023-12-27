@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Data } from "../types/Data";
+import Loader from "./Loader";
 
  type ItemProps ={
   item:Data
@@ -16,8 +17,10 @@ const ImageCard = ({ item }: ItemProps) => {
   // fetch through api was NSFW content
   const handleClick = () => setShow((current) => !current);
 
+
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-xl hover:-translate-y-2 transition duration-200 ease-in-out  ">
+    <>
+     <div className="max-w-sm rounded overflow-hidden shadow-xl hover:-translate-y-2 transition duration-200 ease-in-out  ">
       <div className="flex items-center justify-center">
         <Link to={item.link}>
           <img
@@ -70,6 +73,8 @@ const ImageCard = ({ item }: ItemProps) => {
         </button>
       </div>
     </div>
+    </>
+   
   );
 };
 
