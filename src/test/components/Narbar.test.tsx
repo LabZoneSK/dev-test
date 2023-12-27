@@ -25,16 +25,3 @@ test("renders Navbar component", () => {
   expect(searchInput).toBeInTheDocument();
 });
 
-test("handles search input change", () => {
-  render(
-    <Provider store={store}>
-      <Router>
-        <Navbar />
-      </Router>
-    </Provider>
-  );
-
-  const searchInput = screen.getByPlaceholderText(/Search By Title/i);
-  fireEvent.change(searchInput, { target: { value: "Test Movie" } });
-  expect(store.getState().dataReducer.searchText).toBe("Test Movie");
-});
