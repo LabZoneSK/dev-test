@@ -61,7 +61,7 @@ const Home = () => {
         loader={<Loader />}
         onScroll={loadMore}
       >
-        <div className="menu w-full  flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8 mt-6">
+        <div className="menu w-full  flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-3 mt-6">
         <div className="relative mx-auto text-gray-600 lg:block lg:mt-0 mt-4 ">
           <input
             className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 w-96 rounded-lg text-sm focus:outline-none"
