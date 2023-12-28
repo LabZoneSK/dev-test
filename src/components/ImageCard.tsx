@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Data } from "../types/Data";
+import Loader from "./Loader";
 
-const ImageCard = ({ item }: any) => {
+ type ItemProps ={
+  item:Data
+ }
+
+const ImageCard = ({ item }: ItemProps) => {
   const date = new Date(item.date_taken);
   const regex = /\(\"(.*)\"\)/;
   const match = item.author.match(regex);
@@ -11,8 +17,10 @@ const ImageCard = ({ item }: any) => {
   // fetch through api was NSFW content
   const handleClick = () => setShow((current) => !current);
 
+
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-xl hover:-translate-y-2 transition duration-200 ease-in-out  ">
+    <>
+     <div className="max-w-sm rounded overflow-hidden shadow-xl hover:-translate-y-2 transition duration-200 ease-in-out  ">
       <div className="flex items-center justify-center">
         <Link to={item.link}>
           <img
@@ -38,7 +46,7 @@ const ImageCard = ({ item }: any) => {
           {item.title}
         </div>
         <p className="text-gray-700 text-base font-semibold ">
-          Author: <span className="text-[rgb(11,134,139)] ">{match[1]}</span>
+          Author: <span className="text-[rgb(11,134,139)] ">{match && match[1]}</span>
         </p>
         <p className="text-gray-700 text-base">
           Date:{" "}
@@ -65,6 +73,8 @@ const ImageCard = ({ item }: any) => {
         </button>
       </div>
     </div>
+    </>
+   
   );
 };
 

@@ -1,9 +1,12 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { ChangeEvent, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import ImageCard from "../components/ImageCard";
 import useAppSelector from "../hooks/useAppSelector";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Data } from "../types/Data";
+import useAppDispatch from "../hooks/useAppDispatch";
+import { setSearchText } from "../redux/reducers/dataReducer";
+import Search from "../components/Search";
 
 // Lazy load Hero and Loader components
 const Hero = React.lazy(() => import("../components/Hero"));
@@ -13,26 +16,20 @@ const Home = () => {
   const { data, loading, searchText } = useAppSelector(
     (state) => state.dataReducer
   );
-
+  
   const [items, setItems] = useState<Data[]>([]);
-  const [loader, setLoader] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  const loadMore = () => {
-    setLoader(true);
-
+  
+  const loadMore = useCallback(() => {
     setTimeout(() => {
       const newItems = data.slice(items.length, items.length + 4);
-
       setItems([...items, ...newItems]);
-
-      setLoader(false);
-
       if (items.length >= data.length) {
         setHasMore(false);
       }
     }, 1000);
-  };
+  }, [data, items]); 
 
   useEffect(() => {
     loadMore();
@@ -47,11 +44,12 @@ const Home = () => {
     [debouncedSearchText, items]
   );
 
-  return (
-    <>
-      {loading && <Loader />}
-      <Hero />
 
+  return (
+    <Suspense fallback={<Loader />}>
+      <Hero />
+      {loading && <Loader />}
+      <Search/>
       <InfiniteScroll
         dataLength={items.length}
         next={loadMore}
@@ -59,14 +57,16 @@ const Home = () => {
         loader={<Loader />}
         onScroll={loadMore}
       >
+       
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 px-8 my-12 gap-6 max-w-[80%] m-auto">
+       
           {filteredData &&
             filteredData.map((item) => (
               <ImageCard item={item} key={item.author_id} />
             ))}
         </div>
       </InfiniteScroll>
-    </>
+    </Suspense>
   );
 };
 

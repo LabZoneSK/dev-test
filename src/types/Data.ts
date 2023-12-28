@@ -6,7 +6,7 @@ export interface Data {
   };
   date_taken: string;
   author: string;
-  author_id: string;
+  author_id?: string;
 }
 
 export interface DataReducer {

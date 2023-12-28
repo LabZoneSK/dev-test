@@ -9,3 +9,4 @@ describe("Footer component", () => {
     expect(screen.getByText("Images are From Flickr")).toBeInTheDocument();
   });
 });
+  
