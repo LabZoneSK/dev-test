@@ -1,9 +1,14 @@
 @import url("../variables.css");
 
 .card {
+	display: flex;
+	flex-direction: column;
+
+	background-color: rgba(255, 255, 255, 1);
 	width: 100%;
+	height: 388px;
 	border-radius: 3px;
-	box-shadow: 0px 10px 14px 0px rgba(0, 0, 0, 0.08); /* it adds some white bar at the bottom, check it out when the rest of the card is done */
+	box-shadow: 0px 10px 14px 0px rgba(0, 0, 0, 0.08);
 
 	overflow: hidden; /* so border-radius work */
 }
@@ -26,4 +31,54 @@
 		object-fit: cover;
 		object-position: center center;
 	}
+}
+
+.card-details {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	gap: 20px;
+
+	padding: 20px 27px 20px 24px;
+}
+
+.card-details-cta {
+	--cta-height: 44px;
+	display: block;
+	height: var(--cta-height);
+	border-radius: 3px;
+
+	color: rgba(11, 134, 139, 1);
+	background-color: rgba(245, 245, 245, 1);
+
+	font-family: var(--font-roboto);
+	line-height: var(--cta-height); /* to vertically center text */
+	font-size: 1rem;
+	text-align: center;
+	text-decoration: none;
+}
+
+.card-details-cta:hover {
+	line-height: 42px; /* so that the text inside doesnt move slightly when hovering the button (the height will be 42 (content) + 2 (border) instead of 44 only for the content */
+	border: 1px solid rgba(11, 134, 139, 1);
+}
+
+.card-details-description {
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	flex-grow: 1;
+
+	font-size: 1rem;
+	line-height: 1.25rem;
+}
+
+.card-details-title {
+	font-size: 1.75rem;
+	line-height: 2.125rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

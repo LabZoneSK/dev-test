@@ -11,10 +11,11 @@ export function FlickrFeed(): JSX.Element {
 		<div className={styles["feed-container"]}>
 			{imagesFeed.map((image) => (
 				<ImageCard
-					key={image.description}
+					key={image.imageContentLink}
 					imageTitle={image.title}
 					imageDescription={image.description}
 					imageContentLink={image.imageContentLink}
+					alt={image.alt}
 				/>
 			))}
 		</div>
@@ -37,10 +38,11 @@ interface TransformedFlickrFeedItem {
 	title: string;
 	imageContentLink: string;
 	description: string;
+	alt: string;
 }
 
 function useFlickrFeed(): {
-	imagesFeed: TransformedFlickrFeedItem[]; // transform these, return already what it transformed, maybe make 2 hooks, useFlickrPublicFeedAPI (fetches) and useFlickrPublicFeed (transforms)
+	imagesFeed: TransformedFlickrFeedItem[];
 	//isLoading: boolean;
 	//error: null; // type better
 } {
@@ -50,12 +52,39 @@ function useFlickrFeed(): {
 		fetcher,
 	);
 
+	if (data) {
+		return {
+			imagesFeed: data.items.map((item) => {
+				const parsedDescription = parseDescription(item.description);
+				return {
+					title: item.title,
+					imageContentLink: item.media.m,
+					alt: parsedDescription.alt,
+					description: parsedDescription.descriptionText,
+				};
+			}),
+		};
+	} else {
+		return {
+			imagesFeed: [],
+		};
+	}
+}
+
+function parseDescription(description: string): {
+	alt: string;
+	descriptionText: string;
+} {
+	const parser = new DOMParser();
+	const parsedDescription = parser.parseFromString(description, "text/html");
+	const paragraphs = parsedDescription.getElementsByTagName("p");
+	const altText =
+		paragraphs[1].getElementsByTagName("img")?.[0].getAttribute("alt") ??
+		"";
+	const descriptionText = paragraphs[2]?.innerText ?? "";
+
 	return {
-		imagesFeed:
-			data?.items.map((item) => ({
-				title: item.title,
-				imageContentLink: item.media.m,
-				description: item.description,
-			})) ?? [],
+		alt: altText,
+		descriptionText,
 	};
 }
