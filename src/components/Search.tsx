@@ -19,6 +19,7 @@ const Search = () => {
           name="text"
           onChange={handleChange}
           placeholder="Search By Title"
+          autoComplete="off"
         />
         <button
           type="submit"
