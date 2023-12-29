@@ -1,10 +1,7 @@
-import React, { ChangeEvent } from "react";
-import useAppDispatch from "../hooks/useAppDispatch";
-import { setSearchText } from "../redux/reducers/dataReducer";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-
   return (
     <nav className="flex items-center justify-between flex-wrap bg-[#2C2C2C] py-4 lg:px-12 shadow border-solid border-t-2 border-blue-700">
       <div className="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-gray-300 pb-5 lg:pb-0">
@@ -14,7 +11,6 @@ const Navbar = () => {
           </div>
         </Link>
       </div>
-
     </nav>
   );
 };

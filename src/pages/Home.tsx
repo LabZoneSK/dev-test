@@ -1,10 +1,4 @@
-import React, {
-  Suspense,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
 import ImageCard from "../components/ImageCard";
 import useAppSelector from "../hooks/useAppSelector";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -48,7 +42,6 @@ const Home = () => {
       ),
     [debouncedSearchText, items]
   );
-  console.log(filteredData);
 
   return (
     <Suspense fallback={<Loader />}>
