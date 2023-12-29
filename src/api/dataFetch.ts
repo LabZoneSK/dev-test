@@ -16,12 +16,7 @@ export const fetchAllData = createAsyncThunk<
   { rejectValue: string }
 >("fetchAllData", async (_, { rejectWithValue }) => {
   try {
-    const jsonData = await axios.get(urls.data, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
+    const jsonData = await axios.get(urls.data);
     const data = await jsonData.data;
     toast("Data fetch successfully");
     return data.items;

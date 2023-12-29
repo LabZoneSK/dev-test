@@ -1,12 +1,18 @@
-import React, { ChangeEvent, Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import ImageCard from "../components/ImageCard";
 import useAppSelector from "../hooks/useAppSelector";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Data } from "../types/Data";
-import useAppDispatch from "../hooks/useAppDispatch";
-import { setSearchText } from "../redux/reducers/dataReducer";
+
 import Search from "../components/Search";
+import Skeleton from "../components/Skeleton";
 
 // Lazy load Hero and Loader components
 const Hero = React.lazy(() => import("../components/Hero"));
@@ -16,12 +22,11 @@ const Home = () => {
   const { data, loading, searchText } = useAppSelector(
     (state) => state.dataReducer
   );
-  
+
   const [items, setItems] = useState<Data[]>([]);
   const [hasMore, setHasMore] = useState(true);
 
-  
-  const loadMore = useCallback(() => {
+  const loadMore = () => {
     setTimeout(() => {
       const newItems = data.slice(items.length, items.length + 4);
       setItems([...items, ...newItems]);
@@ -29,7 +34,7 @@ const Home = () => {
         setHasMore(false);
       }
     }, 1000);
-  }, [data, items]); 
+  };
 
   useEffect(() => {
     loadMore();
@@ -43,27 +48,31 @@ const Home = () => {
       ),
     [debouncedSearchText, items]
   );
-
+  console.log(filteredData);
 
   return (
     <Suspense fallback={<Loader />}>
       <Hero />
-      {loading && <Loader />}
-      <Search/>
+      <Search />
       <InfiniteScroll
         dataLength={items.length}
         next={loadMore}
         hasMore={hasMore}
-        loader={<Loader />}
+        loader={<h4>Loading ...</h4>}
         onScroll={loadMore}
       >
-       
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 px-8 my-12 gap-6 max-w-[80%] m-auto">
-       
-          {filteredData &&
+          {filteredData && filteredData.length > 0 ? (
             filteredData.map((item) => (
               <ImageCard item={item} key={item.author_id} />
-            ))}
+            ))
+          ) : (
+            <>
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+            </>
+          )}
         </div>
       </InfiniteScroll>
     </Suspense>
