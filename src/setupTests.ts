@@ -5,3 +5,7 @@ import "@testing-library/jest-dom/vitest";
 beforeEach(() => {
 	cleanup();
 });
+
+afterAll(() => {
+	cleanup();
+});
