@@ -1,0 +1,23 @@
+.feed-container {
+	width: 100%;
+	height: 100%;
+}
+
+.feed-container[aria-busy="false"] {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(286px, 1fr));
+	gap: 20px;
+}
+
+.feed-container[aria-busy="true"] {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+@media (min-width: 768px) {
+	.feed-container {
+		gap: 20px 50px;
+	}
+}

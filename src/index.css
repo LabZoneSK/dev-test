@@ -1,0 +1,40 @@
+@import url("./variables.css");
+
+:root {
+	font-family: var(--font-rosario);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+	margin: 0;
+}
+
+h1 {
+	font-size: 1.75rem;
+	line-height: 2.125rem;
+}
+
+#root {
+	width: 100%;
+	max-width: 1920px;
+	margin: 0 auto;
+}
