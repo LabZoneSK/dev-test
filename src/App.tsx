@@ -2,17 +2,11 @@ import "@fontsource-variable/rosario";
 import "@fontsource/roboto";
 import "./App.module.css";
 import { FlickrFeed } from "./FlickrFeed";
-
-/*
-TODO:
-3. Change the max-width, set some higher value and increase the number of card per row (max 5?)
-4. Filters (see api docs)
-5. Infinite scroll (add a button to enable the infinite scroll, limit to like 10 requests in total?)
-*/
+import SWRCacheProvider from "./utils/SWRCacheProvider";
 
 function App() {
 	return (
-		<>
+		<SWRCacheProvider>
 			<header>
 				<h1>Flick app</h1>
 			</header>
@@ -22,7 +16,7 @@ function App() {
 			<footer>
 				<p>Images are from Flickr.</p>
 			</footer>
-		</>
+		</SWRCacheProvider>
 	);
 }
 

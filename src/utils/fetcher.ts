@@ -1,7 +1,13 @@
 import fetchJsonp from "fetch-jsonp";
 
-export function fetcher(url: string) {
-	return fetchJsonp(url, {
+export async function fetcher(url: string) {
+	const response = await fetchJsonp(url, {
 		jsonpCallbackFunction: "jsonFlickrFeed",
-	}).then((res) => res.json());
+	});
+	if (response.ok) {
+		return response.json();
+	} else {
+		const error = await response.json<unknown>(); // there is no method to get the body as string unfortunately :/
+		throw new Error(JSON.stringify(error));
+	}
 }

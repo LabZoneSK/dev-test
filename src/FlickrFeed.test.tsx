@@ -2,13 +2,18 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { FlickrFeed } from "./FlickrFeed";
 import { fetcher } from "./utils/fetcher";
 import { FlickrFeedItem } from "./hooks/useFlickrFeed";
+import SWRCacheProvider from "./utils/SWRCacheProvider";
 
 vi.mock("./utils/fetcher");
 
 describe("FlickrFeed should", () => {
 	const fetcherMock = fetcher;
 
-	it("render images", async () => {
+	beforeEach(() => {
+		vi.resetAllMocks();
+	});
+
+	it("render image fetched from API", async () => {
 		const ctaText = "Explore ➔";
 		const expectedImageAlt = "some Alt Text";
 		const expectedDescriptionText = "this goes on the bottom of the card";
@@ -18,30 +23,57 @@ describe("FlickrFeed should", () => {
 		});
 		const expectedImageLink = mockImage.media.m;
 		const mockResponseBody = createMockFetcherReturn([mockImage]);
-		vi.mocked(fetcherMock).mockImplementation(() => {
+		vi.mocked(fetcherMock).mockImplementationOnce(() => {
 			return new Promise((resolve) => {
-				setTimeout(() => {
-					resolve(mockResponseBody);
-				}, 50);
+				setTimeout(() => resolve(mockResponseBody), 50);
 			});
 		});
 
-		render(<FlickrFeed />);
+		renderWithFreshCache(<FlickrFeed />);
 
-		await waitFor(() => {
-			expect(screen.queryByText(mockImage.title)).toBeInTheDocument();
-			const img = screen.getByAltText(expectedImageAlt);
-			expect(img).toBeInTheDocument();
-			expect(img).toHaveAttribute("src", expectedImageLink);
-			expect(
-				screen.queryByText(expectedDescriptionText),
-			).toBeInTheDocument();
-			const cta = screen.getByText(ctaText);
-			expect(cta).toBeInTheDocument();
-			expect(cta).toHaveAttribute("href", expectedImageLink);
+		await waitForLoadingSpinnerToDisappear();
+		expect(screen.queryByText(mockImage.title)).toBeInTheDocument();
+		const img = screen.getByAltText(expectedImageAlt);
+		expect(img).toBeInTheDocument();
+		expect(img).toHaveAttribute("src", expectedImageLink);
+		expect(screen.queryByText(expectedDescriptionText)).toBeInTheDocument();
+		const cta = screen.getByText(ctaText);
+		expect(cta).toBeInTheDocument();
+		expect(cta).toHaveAttribute("href", expectedImageLink);
+	});
+
+	it("display generic error text whenever fetching images fails", async () => {
+		vi.mocked(fetcherMock).mockImplementationOnce(() => {
+			return new Promise((_, reject) => {
+				setTimeout(() => reject("some error"), 50);
+			});
 		});
+
+		renderWithFreshCache(<FlickrFeed />);
+
+		await waitForLoadingSpinnerToDisappear();
+		expect(
+			screen.queryByText(
+				"An error occured when fetching images from the API :(",
+			),
+		).toBeInTheDocument();
 	});
 });
+
+function waitForLoadingSpinnerToDisappear() {
+	return waitFor(() => {
+		expect(screen.queryByTestId("loadingSpinner")).not.toBeInTheDocument();
+	});
+}
+
+const renderWithFreshCache = (
+	component: Parameters<typeof render>[0],
+	options: Parameters<typeof render>[1] = {},
+): ReturnType<typeof render> =>
+	render(component, {
+		...options,
+		wrapper: SWRCacheProvider,
+	});
 
 function createMockFetcherReturn(items: FlickrFeedItem[]) {
 	return {

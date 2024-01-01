@@ -22,32 +22,41 @@ export interface TransformedFlickrFeedItem {
 
 export default function useFlickrFeed(): {
 	imagesFeed: TransformedFlickrFeedItem[];
-	//isLoading: boolean;
-	//error: null; // type better
+	isLoading: boolean;
+	error: unknown;
 } {
-	// maybe dont use swr -> no point in caching
-	const { data } = useSWRImmutable<{ items: FlickrFeedItem[] }>(
+	const { data, isLoading, error } = useSWRImmutable<
+		{ items: FlickrFeedItem[] },
+		unknown
+	>(
 		"https://api.flickr.com/services/feeds/photos_public.gne?format=json",
 		fetcher,
 	);
 
+	if (error) {
+		console.error(error);
+	}
+
 	if (data) {
 		return {
 			imagesFeed: data.items.map((item) => {
-				console.log(item);
+				const trimmedTitle = item.title.trim();
 				const parsedDescription = parseDescription(item.description);
-				console.log("parsed", parsedDescription);
 				return {
-					title: item.title,
+					title: trimmedTitle ? trimmedTitle : "Untitled",
 					imageContentLink: item.media.m,
 					alt: parsedDescription.alt,
 					description: parsedDescription.descriptionText,
 				};
 			}),
+			isLoading,
+			error,
 		};
 	} else {
 		return {
 			imagesFeed: [],
+			isLoading,
+			error,
 		};
 	}
 }
@@ -66,6 +75,6 @@ function parseDescription(description: string): {
 
 	return {
 		alt: altText,
-		descriptionText,
+		descriptionText: descriptionText.trim(),
 	};
 }
