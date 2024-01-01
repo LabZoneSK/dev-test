@@ -2,13 +2,6 @@
 
 :root {
 	font-family: var(--font-rosario);
-
-	/*
-	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
-	*/
-
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -45,18 +38,3 @@ h1 {
 	max-width: 1920px;
 	margin: 0 auto;
 }
-
-/*
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #ffffff;
-	}
-	a:hover {
-		color: #747bff;
-	}
-	button {
-		background-color: #f9f9f9;
-	}
-}
-*/

@@ -22,7 +22,7 @@ main {
 
 @media (min-width: 768px) {
 	main {
-		padding: 81px 76px; /* adjust this */
+		padding: 81px 76px;
 	}
 }
 
@@ -40,11 +40,3 @@ footer {
 		line-height: 1.375rem;
 	}
 }
-
-/*
-@media (prefers-reduced-motion: no-preference) {
-	a:nth-of-type(2) .logo {
-		animation: logo-spin infinite 20s linear;
-	}
-}
-*/

@@ -1,4 +1,4 @@
-@import url("../variables.css");
+@import url("../../variables.css");
 
 .card {
 	display: flex;
@@ -9,12 +9,10 @@
 	height: 388px;
 	border-radius: 3px;
 	box-shadow: 0px 10px 14px 0px rgba(0, 0, 0, 0.08);
-
 	overflow: hidden; /* so border-radius work */
 }
 
 @media (min-width: 768px) {
-	/* variables dont work in media queries */
 	.card {
 		max-width: 286px;
 	}

@@ -1,6 +1,6 @@
 import styles from "./FlickrFeed.module.css";
 
-import { ImageCard } from "./components/ImageCard";
+import { ImageCard } from "./components/ImageCard/ImageCard";
 import Loader from "./components/Loader/Loader";
 import useFlickrFeed from "./hooks/useFlickrFeed";
 
