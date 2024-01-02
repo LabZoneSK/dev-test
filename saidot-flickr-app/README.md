@@ -2,18 +2,6 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
 ## Flicker App
 This project is a Frontend system implemented in React with  TypeScript to handle to  demonstate  to set up a React App, load in some photos from Flickr (JSON format) [public API](https://api.flickr.com/services/feeds/photos_public.gne?format=json) and display the photo, name and description in a card layout. The images should be clickable and link to the content. The app should have a header and a footer and ideally be responsive.
 
@@ -34,8 +22,8 @@ src/
 |       |-- useLoader.tsx
 |       |-- useObserver.tsx
 |
-|   |-- CardGallery.tsx
-|   |-- Cards.tsx
+|   |-- cardGallery.tsx
+|   |-- cards.tsx
 |   |-- footer.tsx
 |   |-- header.tsx
 |   |-- search.tsx
