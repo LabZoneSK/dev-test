@@ -48,3 +48,6 @@ $ npm start
 ```
 
 To verify that the application started sucecssfully in local navigate to http://localhost:3000 in your web browser.
+
+![flickerUi](flickerUi.png.png)
+
