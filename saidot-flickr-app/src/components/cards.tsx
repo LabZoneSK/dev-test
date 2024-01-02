@@ -26,10 +26,22 @@ function Card({
       transition: { delay: i * 0.3 },
     }));
   }, [controls]);
+  const handleHoverStart = () => {
+    controls.start({
+      scale: 0.9, 
+    });
+  };
+
+  const handleHoverEnd = () => {
+    controls.start({
+      scale: 1, 
+    });
+  };
   const truncatedDescription = description.slice(0, 150) || "Description coming soon";
 
   return (
-    <motion.article className="card" custom={id} animate={controls}>
+    <motion.article className="card" custom={id}  onHoverStart={handleHoverStart}
+    onHoverEnd={handleHoverEnd} animate={controls} whileHover={{ scale: 0.9 }}>
       <a href={linkToFlickPost}>
         <img src={imageSrc} alt={description} />
       </a>

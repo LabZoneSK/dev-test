@@ -11,16 +11,23 @@ function useFetch(
   const [error, setError] = useState(false);
   const [list, setList] = useState([] as any[]);
   const [text, setText] = useState("");
+  const [noResults, setNoResults] = useState(false);
+
   const sendQuery = useCallback(async () => {
     setLoading(true);
     setError(false);
+    setNoResults(false);
+
     if (text !== searchText) {
       setText(searchText);
       setPage(1);
       setList([]);
     }
     const res = await axios.get(query + page + text);
-
+    if (res.data.photos.photo.length === 0 && page === 1) {
+      // No results found
+      setNoResults(true);
+    }
     setList((prev: any[]) => [...prev, ...res.data.photos.photo]);
     setLoading(false);
     return;
@@ -31,7 +38,7 @@ function useFetch(
     sendQuery();
   }, [query, sendQuery, page]);
 
-  return { loading, error, list };
+  return { loading, error, list, noResults };
 }
 
 export default useFetch;

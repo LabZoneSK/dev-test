@@ -15,12 +15,14 @@ interface FlickerApiResponse {
     list: FlickerApiResponse[];
     setPage: React.Dispatch<React.SetStateAction<number>>;
     loading: boolean;
+    noResults?: boolean;
   }
-  function CardGallery({ list, setPage, loading }: CardGalleryProps) {
+  function CardGallery({ list, setPage, loading ,noResults }: CardGalleryProps) {
     const { loader } = useLoader({ setPage });
     return (
       <>
         {list.map((p: FlickerApiResponse, key: number) => {
+          const truncatedtitle = p.title.slice(0, 25) ;
           return (
             <Card
               key={key}
@@ -39,7 +41,7 @@ interface FlickerApiResponse {
               linkToFlickPost={
                 "https://www.flickr.com/photos/" + p.owner + "/" + p.id
               }
-              title={p.title}
+              title={truncatedtitle}
               description={p.description._content}
             />
           );

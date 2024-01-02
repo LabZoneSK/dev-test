@@ -1,4 +1,5 @@
-import { useRef, Dispatch, SetStateAction } from "react";
+import { useRef, Dispatch, SetStateAction, KeyboardEvent } from "react";
+import { FcSearch } from "react-icons/fc";
 
 interface SearchProps {
   setPage: Dispatch<SetStateAction<number>>;
@@ -14,15 +15,21 @@ const Search: React.FC<SearchProps> = ({ setSearchText }) => {
       setSearchText(`&text=${input.value}`);
     }
   };
-
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleChange();
+    }
+  };
   return (
     <div className="searchbar">
       <input
         ref={searchBar}
-        placeholder="Search a image you want..."
+        placeholder="Search..."
+        onKeyDown={handleKeyDown}
       />
       <button className="search-btn" onClick={handleChange}>
-      Search
+      {" "}
+    <FcSearch />
         </button>
     </div>
   );
