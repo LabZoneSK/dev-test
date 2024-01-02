@@ -6,7 +6,7 @@ import Footer from "./components/footer";
 import useFetch from "./components/hooks/useFetch";
 import Search from "./components/search";
 import useToTopButton from "./components/hooks/useObserver";
-import CardListing from "./components/CardGallery";
+import CardListing from "./components/cardGallery";
 import { flickrApiQuery } from "./constants";
 
 
