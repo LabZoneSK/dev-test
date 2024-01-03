@@ -1,21 +1,11 @@
-# Labzone - FE Developer Skill Test
+# Topics and choices
+Followed the instructions given by company. Instructions can be seen in README.dev-test-md
 
-A simple test app to ascertain developer skill-level.
+Chose to use TailwindCSS and Flowbite (and Flowbite React), as this is the technology used by the company.
+Started out creating the base layout, with a header, footer and main components. In Main - split into the Search Component and Gallery. Gallery would be a map of Images.
 
-The challenge is to create a basic app using HTML, CSS, JavasScript - React.js and the Flickr API.
+Had trouble getting the data from Flickr public feed, because it was given in JSONP (JSON with padding). Had to learn about JSONP and then find a way to use the data. Originally used axios to get the data, but axios does not support JSONP. Used the suggestion from the COOKBOOK of axios to use the jsonp package to get the data.
 
-The app should demonstate your ability to set up a React App, load in some photos from Flickr (JSON format) [public API](https://api.flickr.com/services/feeds/photos_public.gne?format=json) and display the photo, name and description in a card layout. The images should be clickable and link to the content. The app should have a header and a footer and ideally be responsive.
+Once the data was working correctly, made cards for the images, and then mapped the images into the Gallery and Image cards.
 
-Bonus points will be awarded for a working search box, loading more photos on scroll and any other visual improvements or animations that you would like to add.
-
-Please fork this repository and create pull request when you are done.
-
-If you do wish to use other Flickr API feeds, be aware that some endpoints do require an API key. You can register for an API key [here](https://www.flickr.com/services/apps/create/).
-
-More documentation on the API can be found on [this link](https://www.flickr.com/services/api/).
-
-Pixel perfect mockup to design is a real focus for us at Labzone, the mockup for the test can be found @ https://www.figma.com/file/WnxpAKMFJkzvcrzf4h8vok/Flickr-App (you will need to login to see design details / sidebar)
-
-
-
-### Good luck !
+I assumed that the majority of the Flowbite/TailwindCSS components were responsive, but they were not. So had to rework the layout to be responsive from mobile first (suggested by TailwindCSS docs).
