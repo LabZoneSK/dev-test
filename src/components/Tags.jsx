@@ -10,7 +10,6 @@ export const Tags = ({ tags }) => {
 
   const tagsToArray = (unsplitTags) => {
     let result = unsplitTags.split(" ");
-    console.log("tags to array", result);
     return result;
   };
 

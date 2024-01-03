@@ -1,8 +1,6 @@
 import { Image } from "./Image";
 
 export const Gallery = ({ images }) => {
-  console.log(images);
-  
   return (
     <>
       {images.length > 0 ? (
