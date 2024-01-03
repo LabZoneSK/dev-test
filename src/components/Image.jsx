@@ -17,7 +17,7 @@ export const Image = ({ image, id }) => {
       imgAlt={image.title}
       imgSrc={image.media.m}
     >
-      <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-balance">
+      <h3 className="lg:text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-balance">
         {image.title}
       </h3>
       <p className="font-normal text-gray-700 dark:text-gray-400">
