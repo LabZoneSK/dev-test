@@ -1,4 +1,4 @@
-import { Card, Badge } from "flowbite-react";
+import { Card } from "flowbite-react";
 import { Button } from "flowbite-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
